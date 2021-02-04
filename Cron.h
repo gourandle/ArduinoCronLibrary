@@ -7,23 +7,31 @@
 
 #ifndef CRON_H_
 #define CRON_H_
-#include <Wire.h>
+
 #include <RTClib.h>
 #include <Arduino.h>
-#include "TimedCommand.h"
+#include "StartStopTimer.h"
 
 class Cron {
 public:
-  Cron(TimedCommand **,int); // Get pointer to array of pointers
+  Cron();
+  Cron(StartStopTimer *,int); // Get pointer to array of pointers
   virtual ~Cron();
   void loop();
   void printTime();
+  void printTimeInput(DateTime);
   void setTime(DateTime);
-  boolean matchCron(String,DateTime);
+  DateTime getNextTrigger();
+  void resetNextTrig();
 private:
-  TimedCommand **timedCommands;
+  boolean matchCron(String,DateTime);
+  boolean validateCronString(String);
+
+  StartStopTimer* timedCommands;
   int timedCommandsSize;
   DateTime getTime();
+  DateTime nxtTrig;
+  unsigned long loopInterval;
 };
 
 #endif /* CRON_H_ */

@@ -16,14 +16,6 @@
 //FIXME: find out how to make this more generic
 typedef bool (*ctrlPtr)(uint8_t, bool, char *, bool);
 
-// typedef struct{
-//   char startCronString[28];
-//   char stopCronString[28];
-//   uint8_t address; //NOTE: differs from .proto is uint32_t
-//   char originatingEventId[50];
-//   _X2_V1_Command cmd;
-// } Timer_Configuration;
-
 class StartStopTimer{
 public:
   StartStopTimer();

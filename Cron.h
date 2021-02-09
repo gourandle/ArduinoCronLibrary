@@ -32,6 +32,7 @@ private:
   DateTime getTime();
   DateTime nxtTrig;
   unsigned long loopInterval;
+  unsigned long execInterval;
 };
 
 #endif /* CRON_H_ */

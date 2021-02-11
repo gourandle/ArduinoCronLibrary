@@ -21,7 +21,7 @@ public:
   void printTime();
   void printTimeInput(DateTime);
   void setTime(DateTime);
-  DateTime getNextTrigger();
+  unsigned long getNextTrigDiff();
   void resetNextTrig();
 private:
   boolean matchCron(String,DateTime);

@@ -393,6 +393,21 @@ void Cron::setTime(DateTime time){
   DS_RTC.adjust(time);
 }
 
-DateTime Cron::getNextTrigger(){
-  return nxtTrig;
+/**
+ * @return difference between the time it was executed and next trigger time in seconds
+ */ 
+unsigned long Cron::getNextTrigDiff(){
+  unsigned long nxtTrigDiff = 0;
+
+  unsigned long nxtTrigU = nxtTrig.unixtime();
+  unsigned long curTimeU = getTime().unixtime();
+
+  SerialUSB.println(nxtTrigU);
+  SerialUSB.println(curTimeU);
+
+  if (nxtTrigU > curTimeU){
+    nxtTrigDiff = nxtTrigU - curTimeU;
+  }
+
+  return nxtTrigDiff;
 }

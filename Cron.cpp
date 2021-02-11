@@ -16,7 +16,6 @@ Cron::Cron(StartStopTimer *iTimedCommands, int iTimedCommandsSize) {
   timedCommands = iTimedCommands;
   timedCommandsSize = iTimedCommandsSize;
   loopInterval = 0;
-  execInterval = 0;
   
   nxtTrig = DateTime(2000,1,1,0,0,0);
 }
@@ -26,10 +25,10 @@ Cron::~Cron() {
 
 void Cron::resetNextTrig(){
   nxtTrig = DateTime(2000,1,1,0,0,0);
-  loop();
+  loop(true);
 }
 
-void Cron::loop(){
+void Cron::loop(bool force){
   unsigned long cur = millis();
   bool excStartIds[timedCommandsSize], excStopIds[timedCommandsSize];
 
@@ -39,7 +38,7 @@ void Cron::loop(){
     excStopIds[i] = false;
   }
 
-  if ((cur - loopInterval) >= 500){
+  if ((cur - loopInterval) >= 500 || force){
     loopInterval = cur;
     DateTime time = getTime();
     
@@ -59,10 +58,8 @@ void Cron::loop(){
     // SerialUSB.println("--------");
     SerialUSB.print("NXT TRIG: ");
     printTimeInput(nxtTrig);
-  }
 
-  if ((cur - execInterval) > 1000){
-    execInterval = cur;
+    //FIXME: this can be executed twice within the same second.
     for (int i=0; i < timedCommandsSize; i++){
       if (excStartIds[i]) {
         excStartIds[i] = false;
@@ -73,7 +70,7 @@ void Cron::loop(){
         timedCommands[i].executeStopCommand();
       }
     }
-  }
+  } //end first if
 }
 
 DateTime Cron::getTime(){

@@ -17,7 +17,7 @@ public:
   Cron();
   Cron(StartStopTimer *,int); // Get pointer to array of pointers
   virtual ~Cron();
-  void loop();
+  void loop(bool force = false);
   void printTime();
   void printTimeInput(DateTime);
   void setTime(DateTime);
@@ -32,7 +32,6 @@ private:
   DateTime getTime();
   DateTime nxtTrig;
   unsigned long loopInterval;
-  unsigned long execInterval;
 };
 
 #endif /* CRON_H_ */

@@ -61,6 +61,10 @@ Timers_Configuration StartStopTimer::getConfig(){
   return config;
 }
 
+bool StartStopTimer::getEnabled(){
+  return config.enabled;
+}
+
 void StartStopTimer::executeStartCommand(){
   cmdFunc(config.address, true, config.originatingEventId, false);
 }

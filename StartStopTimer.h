@@ -35,6 +35,7 @@ public:
 
   char * getStartCronString();
   char * getStopCronString();
+  bool getEnabled();
 protected:
   Timers_Configuration config;
   ctrlPtr cmdFunc;

@@ -46,11 +46,11 @@ void Cron::loop(bool force){
     printTime();
 
     for (int i = 0; i< timedCommandsSize; i++){
-      if (validateCronString(timedCommands[i].getStartCronString()) && matchCron(timedCommands[i].getStartCronString(),time)){
+      if (timedCommands[i].getEnabled() && validateCronString(timedCommands[i].getStartCronString()) && matchCron(timedCommands[i].getStartCronString(),time)){
         excStartIds[i] = true;
       }
 
-      if (validateCronString(timedCommands[i].getStopCronString()) && matchCron(timedCommands[i].getStopCronString(),time)){
+      if (timedCommands[i].getEnabled() && validateCronString(timedCommands[i].getStopCronString()) && matchCron(timedCommands[i].getStopCronString(),time)){
         excStopIds[i] = true;
       }
     }
@@ -402,8 +402,8 @@ unsigned long Cron::getNextTrigDiff(){
   unsigned long nxtTrigU = nxtTrig.unixtime();
   unsigned long curTimeU = getTime().unixtime();
 
-  SerialUSB.println(nxtTrigU);
-  SerialUSB.println(curTimeU);
+  // SerialUSB.println(nxtTrigU);
+  // SerialUSB.println(curTimeU);
 
   if (nxtTrigU > curTimeU){
     nxtTrigDiff = nxtTrigU - curTimeU;

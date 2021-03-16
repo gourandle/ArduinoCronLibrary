@@ -42,8 +42,8 @@ void Cron::loop(bool force){
     loopInterval = cur;
     DateTime time = getTime();
     
-    SerialUSB.print("CUR TIME: ");
-    printTime();
+    // SerialUSB.print("CUR TIME: ");
+    // printTime();
 
     for (int i = 0; i< timedCommandsSize; i++){
       if (timedCommands[i].getEnabled() && validateCronString(timedCommands[i].getStartCronString()) && matchCron(timedCommands[i].getStartCronString(),time)){
@@ -56,8 +56,8 @@ void Cron::loop(bool force){
     }
 
     // SerialUSB.println("--------");
-    SerialUSB.print("NXT TRIG: ");
-    printTimeInput(nxtTrig);
+    // SerialUSB.print("NXT TRIG: ");
+    // printTimeInput(nxtTrig);
 
     //FIXME: this can be executed twice within the same second.
     for (int i=0; i < timedCommandsSize; i++){

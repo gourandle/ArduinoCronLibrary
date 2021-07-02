@@ -46,6 +46,19 @@ void Cron::loop(bool force){
     // printTime();
 
     for (int i = 0; i< timedCommandsSize; i++){
+
+      // if (timedCommands[i].getEnabled()){
+      //   SerialUSB.print(timedCommands[i].getEnabled());
+      //   SerialUSB.print(" ");
+      //   SerialUSB.print(i);
+      //   SerialUSB.println(" ENABLED!");
+      // } else {
+      //   SerialUSB.print(timedCommands[i].getEnabled());
+      //   SerialUSB.print(" ");
+      //   SerialUSB.print(i);
+      //   SerialUSB.println(" DISABLED!");
+      // }
+
       if (timedCommands[i].getEnabled() && validateCronString(timedCommands[i].getStartCronString()) && matchCron(timedCommands[i].getStartCronString(),time)){
         excStartIds[i] = true;
       }

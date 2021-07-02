@@ -20,7 +20,7 @@ class StartStopTimer{
 public:
   StartStopTimer();
   StartStopTimer(Timers_Configuration, ctrlPtr);
-  StartStopTimer(char *, char *, ctrlPtr, uint8_t, char *, _X2_V1_Command);
+  StartStopTimer(char *, char *, ctrlPtr, uint8_t, char *, _X2_V1_Command, bool);
   virtual ~StartStopTimer();
 
   void setStartTimer(char *);
@@ -37,7 +37,7 @@ public:
   char * getStopCronString();
   bool getEnabled();
 protected:
-  Timers_Configuration config;
+  Timers_Configuration config = Timers_Configuration_init_zero;
   ctrlPtr cmdFunc;
 };
 

@@ -11,11 +11,12 @@ StartStopTimer::StartStopTimer(Timers_Configuration _config, ctrlPtr _cmdFunc){
   cmdFunc = _cmdFunc;
 }
 
-StartStopTimer::StartStopTimer(char * startCron, char * stopCron, ctrlPtr _cmdFunc, uint8_t _addr, char * _eventId, _X2_V1_Command cmd) {
+StartStopTimer::StartStopTimer(char * startCron, char * stopCron, ctrlPtr _cmdFunc, uint8_t _addr, char * _eventId, _X2_V1_Command cmd, bool enabled) {
   cmdFunc = _cmdFunc;
   config.address = _addr;
   strcpy(config.originatingEventId, _eventId);
   config.cmd = cmd;
+  config.enabled = enabled;
 
   //unused - kept here for reference
   // timers[0] = TimedCommand(startCron, (cmdPtr)(&StartStopTimer::executeStartCommand));
